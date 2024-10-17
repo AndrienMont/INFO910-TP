@@ -28,7 +28,7 @@ COPY --from=builder /app/package*.json ./
 RUN npm install --only=production
 
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 8000
 
 # Run the application
 CMD ["node", "build"]
