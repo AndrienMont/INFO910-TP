@@ -53,3 +53,22 @@ app.post('/register', async function(req, res){
         client.close();
     }
 });
+
+app.post('/login', async function(req, res){
+    try{
+        await client.connect();
+        console.log("Connected correctly to server");
+        const db = client.db(dbName);
+        const collection = db.collection('users');
+        let user = req.body;
+        const result = await collection.findOne(user);
+        console.log('Found the following user:');
+        console.log(result);
+        res.status(200).json(result);
+    }catch (err){
+        res.status(400).json({ message: err.message });
+    }finally{
+        client.close();
+    }
+});
+

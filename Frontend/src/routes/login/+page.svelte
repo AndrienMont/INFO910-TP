@@ -1,4 +1,6 @@
 <script>
+    import { onMount } from 'svelte';
+
     let username = '';
     let password = '';
     let confirmPassword = '';
@@ -16,10 +18,17 @@
         })
         .then(response => response.json())
         .then(data => {
+            if (data) {
+                localStorage.setItem('username', username);
+                window.location.href = '/';
+            } else {
+                alert('Login failed');
+            }
             console.log('Success:', data);
         })
         .catch((error) => {
             console.error('Error:', error);
+            alert('An error occurred during login');
         });
     };
 
@@ -39,6 +48,8 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+                localStorage.setItem('username', username);
+                window.location.href = '/';
             })
             .catch((error) => {
                 console.error('Error:', error);
