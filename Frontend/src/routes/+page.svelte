@@ -20,4 +20,6 @@
 {:else}
     <h1>Welcome to TrouvImmo, {username}</h1>
     <button on:click={handleLogout}>Logout</button>
+    <a href="/publish">Publish an estate</a>
 {/if}
+

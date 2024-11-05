@@ -20,6 +20,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/adapter-node": "^5.2.6"
+		"@sveltejs/adapter-node": "^5.2.6",
+		"@sveu/browser": "^1.0.1",
+		"js-base64": "^3.7.7",
+		"pica": "^9.0.1"
 	}
 }

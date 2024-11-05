@@ -1,18 +1,51 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
+    import { Base64 } from 'js-base64';
 
     let username = '';
     let name = '';
     let price = '';
     let location = '';
     let superficy = '';
+    let base64Image = '';
 
     onMount(() => {
         username = localStorage.getItem('username') || '';
     });
 
+    const handleFileChange = (event: Event) => {
+        const target = event.target as HTMLInputElement;
+        if (target && target.files) {
+            const file = target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                if (reader.result) {
+                    if (typeof reader.result === 'string') {
+                        base64Image = reader.result.split(',')[1];
+                    }
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const publishEstate = () => {
-        // send estate data to api for publishing
+        fetch('http://localhost:3000/publish', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, name, price, location, superficy, image: base64Image, buyer: "" })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            alert('Annonce publiée avec succès');
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Une erreur est survenue lors de la publication de l\'annonce');
+        });
     };
 
 </script>
@@ -52,6 +85,20 @@
         border-radius: 5px;
     }
 
+    .input-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .input-group input {
+        flex: 1;
+    }
+
+    .input-group span {
+        margin-left: 8px;
+        font-weight: bold;
+    }
+
     button {
         display: block;
         width: 100%;
@@ -78,11 +125,14 @@
     </div>
     <div class="form-group">
         <label for="picture">Image:</label>
-        <input type="file" id="picture" required>
+        <input type="file" id="picture" on:change={handleFileChange} required>
     </div>
     <div class="form-group">
         <label for="price">Prix:</label>
-        <input type="number" id="price" bind:value={price} required>
+        <div class="input-group">
+            <input type="number" id="price" bind:value={price} required>
+            <span>€</span>
+        </div>
     </div>
     <div class="form-group">
         <label for="location">Localisation:</label>
@@ -90,7 +140,10 @@
     </div>
     <div class="form-group">
         <label for="superficy">Superficie:</label>
-        <input type="number" id="superficy" bind:value={superficy} required>
+        <div class="input-group">
+            <input type="number" id="superficy" bind:value={superficy} required>
+            <span>m²</span>
+        </div>
     </div>
     <button type="submit">Publier</button>
 </form>
