@@ -9,7 +9,7 @@
     const handleLogin = () => {
         // Handle login logic here
         console.log('Logging in with', username, password);
-        fetch('http://localhost:3000/login', {
+        fetch('http://backend:3000/login', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
@@ -38,7 +38,7 @@
             alert('Les mots de passe ne correspondent pas');
             return;
         } else {
-            fetch('http://localhost:3000/register', {
+            fetch('http://backend:3000/register', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'

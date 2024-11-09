@@ -30,7 +30,7 @@
     };
 
     const publishEstate = () => {
-        fetch('http://localhost:3000/publish', {
+        fetch('http://backend:3000/publish', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

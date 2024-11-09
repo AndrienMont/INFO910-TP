@@ -23,7 +23,7 @@
     };
 
     const fetchEstates = async () => {
-        fetch('http://localhost:3000/sellableEstates', {
+        fetch('http://backend:3000/sellableEstates', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -45,7 +45,7 @@
      */
     async function deleteEstate(id) {
     try {
-      const response = await fetch(`http://localhost:3000/deleteEstate/${id}`, {
+      const response = await fetch(`http://backend:3000/deleteEstate/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
