@@ -104,3 +104,29 @@ app.get('/sellableEstates', async function(req, res){
         client.close();
     }
 })
+
+const { ObjectId } = require('mongodb');
+
+app.delete('/deleteEstate/:id', async function(req, res){
+    try {
+        await client.connect();
+        console.log("Connected correctly to server");
+        const db = client.db(dbName);
+        const collection = db.collection('estates');
+        const estateId = req.params.id; // Récupérer l'ID depuis l'URL
+        
+        // Utiliser ObjectId pour transformer l'ID en un type compatible avec MongoDB
+        const result = await collection.deleteOne({ _id: new ObjectId(estateId) });
+        
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: "Estate not found" });
+        }
+        
+        console.log('Deleted the estate with ID: ' + estateId);
+        res.status(200).json({ message: 'Estate deleted successfully' });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    } finally {
+        client.close();
+    }
+});

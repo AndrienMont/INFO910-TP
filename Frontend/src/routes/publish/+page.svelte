@@ -40,12 +40,21 @@
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-            alert('Annonce publiée avec succès');
+            window.location.href = "/";
         })
         .catch((error) => {
             console.error('Error:', error);
             alert('Une erreur est survenue lors de la publication de l\'annonce');
         });
+    };
+
+    function navHome() {
+    window.location.href = "/";
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('username');
+        window.location.href = "/";
     };
 
 </script>
@@ -114,9 +123,47 @@
     button:hover {
         background-color: #0056b3;
     }
+
+    /* Style de la navbar */
+    .navbar {
+        background-color: #333;
+        padding: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+
+    .navbar button {
+        background-color: #70766d;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+       cursor: pointer;
+        font-size: 16px;
+      }
+
+    .navbar button:hover {
+        background-color: #5e645c;
+    }
+
+    .navbar .logout {
+        background-color: #f44336;
+    }
+
+    .navbar .logout:hover {
+        background-color: #d32f2f;
+    }
 </style>
 
-
+<div class="navbar"> 
+        <div>
+            <button on:click={navHome}>Home</button>
+        </div>
+        <div>
+            <button class="logout" on:click={handleLogout}>Logout</button>
+        </div>
+</div>
 <h1>Publiez votre annonce de vente immobilière</h1>
 <form on:submit|preventDefault={publishEstate}>
     <div class="form-group">

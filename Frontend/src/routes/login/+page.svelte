@@ -57,12 +57,17 @@
         }
         console.log('Registering with', username, password, confirmPassword);
     };
+
+    function navHome() {
+    window.location.href = "/";
+    };
 </script>
 
 <style>
     .container {
         max-width: 400px;
         margin: 0 auto;
+        margin-top: 10px;
         padding: 2rem;
         border: 1px solid #ccc;
         border-radius: 8px;
@@ -104,8 +109,32 @@
         cursor: pointer;
     }
 
+    .navbar {
+    background-color: #333;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+  
+  .navbar button {
+    background-color: #70766d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .navbar button:hover {
+    background-color: #5e645c;
+  }
 </style>
-    
+
+<div class="navbar"> 
+    <button on:click={navHome}>Home</button>
+</div>
 <div class="container">
     <h1>{isRegistering ? 'Register' : 'Login'}</h1>
     <form on:submit|preventDefault={isRegistering ? handleRegister : handleLogin}>
