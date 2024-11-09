@@ -7,7 +7,7 @@
 ---
 ## Description
 Il s'agit d'un site web de vente de biens immobiliers.
-Ce projet et constitué d'un front réalisé en Svelte communicant avec un backend Node.js connecter à une base de données MongoDB.
+Ce projet et constitué d'un front réalisé en Svelte communicant avec un backend Node.js connecté à une base de données MongoDB.
 L'application est déployée sur un cluster local Minikube en utilisant Docker pour créer des conteneurs.
 
 ## Prérequis
@@ -35,6 +35,7 @@ L'application est déployée sur un cluster local Minikube en utilisant Docker p
 
     ```bash
     kubectl -f apply mongo-secret.yaml
+    kubectl -f apply mongo-volume.yaml
     kubectl -f apply mongo-deployement.yaml
     kubectl -f apply backend-deployement.yaml
     kubectl -f apply frontend-deployement.yaml
