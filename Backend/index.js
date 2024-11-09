@@ -4,8 +4,8 @@ const cors = require('cors');
 const http = require('http').Server(app);
 const { MongoClient } = require('mongodb');
 
-const url = 'mongodb://localhost:27017';
-const dbName = 'INFO910';
+const url = process.env.MONGO_URL || 'mongodb://localhost:27017';
+const dbName = process.env.DB_NAME || 'INFO910';
 const client = new MongoClient(url);
 
 app.use(cors({ origin: "*" }));

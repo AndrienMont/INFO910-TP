@@ -10,6 +10,9 @@
         fetchEstates();
     });
 
+    /**
+     * @param {string} page
+     */
     function navTo(page) {
     window.location.href = page;
     };
@@ -37,6 +40,9 @@
 
 
 
+    /**
+     * @param {string} id
+     */
     async function deleteEstate(id) {
     try {
       const response = await fetch(`http://localhost:3000/deleteEstate/${id}`, {
@@ -68,7 +74,7 @@
     flex-direction: column;
     gap: 0.75rem;
     padding: 1rem;
-    align-items: left; /* Centre les cartes */
+    align-items: center; /* Centre les cartes */
 }
 
 /* Carte individuelle de chaque annonce */
